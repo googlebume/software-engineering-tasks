@@ -27,49 +27,51 @@ main:
     push rbp
     mov  rbp, rsp
 
-    ; --- print "Input a: " ---
-    lea  rcx, [msg_a]       ; RCX — перший аргумент для printf (Windows x64 ABI)
+    ; print "Input a: "
+    lea  rcx, [msg_a]
     xor  eax, eax
     call printf
 
-    ; --- read a ---
+    ; read a
     lea  rcx, [fmt_in]
     lea  rdx, [a]
     xor  eax, eax
     call scanf
 
-    mov  dword [x], 1       ; x = 1
+    mov  dword [x], 1          ; x = 1
 
 outer_loop:
-    mov  dword [y], 10      ; y = 10
+    mov  dword [y], 10         ; y = 10
+
+    ; inner y-loop counter
+    mov  ecx, 6                ; (10..20 step 2) → 6 ітерацій
 
 inner_loop:
     mov  eax, 7
-    imul eax, dword [x]     ; eax = 7 * x
+    imul eax, dword [x]        ; eax = 7 * x
     mov  ebx, 3
-    imul ebx, dword [y]     ; ebx = 3 * y
+    imul ebx, dword [y]        ; ebx = 3 * y
     add  eax, ebx
     sub  eax, 3
-    mov  [f], eax           ; f = eax
+    mov  [f], eax
 
-    ; --- check condition ---
+    ; check condition x*y > a
     mov  eax, [x]
     imul eax, [y]
     cmp  eax, [a]
     jg   stop_calc
 
-    ; --- y += 2 ---
+    ; next y += 2
     add  dword [y], 2
-    cmp  dword [y], 20
-    jle  inner_loop
+    loop inner_loop            ; <-- Використано LOOP
 
-    ; --- x += 4 ---
+    ; next x += 4
     add  dword [x], 4
     cmp  dword [x], 20
     jle  outer_loop
 
 stop_calc:
-    ; printf("x=%d, y=%d, f=%d", x, y, f)
+    ; print result
     lea  rcx, [fmt_out]
     mov  edx, [x]
     mov  r8d, [y]
