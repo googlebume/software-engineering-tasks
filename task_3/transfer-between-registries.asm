@@ -6,22 +6,18 @@ section .data
 
 section .text
 main:
-    mov ax, 0
-    mov bx, ax
-    mov cx, ax
-    mov dx, ax
 
-    mov ah, 0AFh
-    mov bh, ah
-    mov bl, bh
-    mov ch, bl
+    mov dx, 0A2D0h   ; Регістр 1
+    mov cx, dx       ; Регістр 2
+    mov ax, dx       ; Регістр 3
+    mov bx, dx       ; Регістр 4
 
-    ; виклик printf(fmt, AX, BX, CX, DX)
-    mov rcx, fmt
-    mov rdx, rax    ; AX -> RDX
-    mov r8, rbx     ; BX -> R8
-    mov r9, rcx     ; CX -> R9
-    sub rsp, 32     ; вирівнювання стеку для Windows x64 ABI
+    ;
+    mov rcx, fmt     ; перший параметр - рядок формату
+    mov rdx, rax     ; AX -> RDX
+    mov r8, rbx      ; BX -> R8
+    mov r9, rcx      ; CX -> R9
+    sub rsp, 32      ; вирівнювання стеку
     call printf
     add rsp, 32
 

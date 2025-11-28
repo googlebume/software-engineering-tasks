@@ -7,7 +7,7 @@
 
 section .data
     string      db "Hello, World!", 0      ; Рядок для пошуку
-    target_char db 'o'                     ; Шуканий символ
+    target_char db 'Q'                     ; Шуканий символ
     fmt_found   db "Character '%c' found at position: %d", 10, 0
     fmt_not     db "Character '%c' not found.", 10, 0
 
