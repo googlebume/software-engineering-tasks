@@ -34,10 +34,11 @@ cd software-engineering-tasks
 ## 🛠 Компіляція та лінкування
 
 # Ассемблер
-nasm -f elf32 <file-name>.asm -o <file-name>.obj
+nasm -f elf32 >file-name<.asm -o >file-name<.obj
 
 # Лінкування з GCC
-gcc -m32 <file-name>.obj -o <file-name>.exe
+gcc -m32 >file-name<.obj -o >file-name<.exe
 
 # Запуск
 ./<file-name>.exe
+
